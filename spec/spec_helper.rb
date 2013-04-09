@@ -16,7 +16,7 @@ end
 
 ActiveRecord::Base.establish_connection(
   adapter: 'sqlite3',
-  database: ':memory:' # File.dirname(__FILE__) + '/faraday_test.sqlite3'
+  database: File.dirname(__FILE__) + '/faraday_test.sqlite3'
 )
 
 ActiveRecord::Schema.define do

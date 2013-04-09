@@ -1,5 +1,5 @@
 module VoicecomSms
-  def self.configure
+  configure do |config|
 
   end
 end

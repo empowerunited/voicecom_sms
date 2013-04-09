@@ -1,4 +1,6 @@
 require 'voicecom_sms/message'
+require 'voicecom_sms/request'
+require 'voicecom_sms/response'
 
 module VoicecomSms
   class Provider

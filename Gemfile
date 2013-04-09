@@ -13,3 +13,4 @@ group :development do
 end
 
 gem "activerecord", '~> 3.2.0'
+gem "hashie"

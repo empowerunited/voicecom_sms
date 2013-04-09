@@ -24,8 +24,13 @@ module VoicecomSms
       message.update_attribute :request, request.to_s
 
       if message.save
-        @response.parse(@request.http_send)
-        message.update_attributes response: response.to_s, response_recieved_at: Time.current
+        @response.parse(@request.send_message)
+        message.update_attributes(
+          response: response.to_s,
+          status: response.status,
+          response_received_at: Time.current
+        )
+        response.status
       end
     end
 

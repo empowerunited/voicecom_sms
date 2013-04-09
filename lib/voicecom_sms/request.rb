@@ -1,9 +1,11 @@
+require 'net/http'
+
 module VoicecomSms
   class Request
     attr_accessor :uri, :params
 
     def initialize
-      @uri = URI.parse(VoicecomSms.config.provider_ip)
+      @uri = URI.parse('http://' + VoicecomSms.config.provider_ip)
       @params = {}
     end
 
@@ -12,8 +14,8 @@ module VoicecomSms
       @uri.query = URI.encode_www_form(@params)
     end
 
-    def http_send
-
+    def send_message
+      Net::HTTP.get_response(@uri)
     end
 
     def to_s

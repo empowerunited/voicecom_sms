@@ -9,12 +9,12 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Evgenia Manolova"]
-  s.date = "2013-04-08"
+  s.date = "2013-04-10"
   s.description = "A fast SMS engine that uses VoiceCom as a service provider"
   s.email = "emanolova@gmail.com"
   s.extra_rdoc_files = [
     "LICENSE.txt",
-    "README.rdoc"
+    "README.md"
   ]
   s.files = [
     ".document",
@@ -22,20 +22,20 @@ Gem::Specification.new do |s|
     "Gemfile",
     "Gemfile.lock",
     "LICENSE.txt",
-    "README.rdoc",
+    "README.md",
     "Rakefile",
     "VERSION",
+    "lib/generators/templates/initializers/voicecom_sms.rb",
+    "lib/generators/templates/migrations/create_voicecom_messages.rb",
+    "lib/generators/voicecom_sms_generator.rb",
     "lib/voicecom_sms.rb",
-    "lib/voicecom_sms/generators/voicecom_sms/install/install_generator.rb",
     "lib/voicecom_sms/message.rb",
     "lib/voicecom_sms/provider.rb",
-    "lib/voicecom_sms/provider/request.rb",
-    "lib/voicecom_sms/provider/response.rb",
-    "lib/voicecom_sms/recipient.rb",
-    "lib/voicecom_sms/verification_code.rb",
+    "lib/voicecom_sms/request.rb",
+    "lib/voicecom_sms/response.rb",
     "spec/spec_helper.rb",
-    "spec/voicecom_sms/request_spec.rb",
-    "spec/voicecom_sms_spec.rb"
+    "spec/voicecom_sms/provider_spec.rb",
+    "voicecom_sms.gemspec"
   ]
   s.homepage = "http://github.com/zzeni/voicecom_sms"
   s.licenses = ["MIT"]
@@ -48,26 +48,32 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<activerecord>, ["~> 3.2.0"])
-      s.add_runtime_dependency(%q<faraday>, [">= 0"])
+      s.add_runtime_dependency(%q<hashie>, ["~> 1.2.0"])
       s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, ["~> 1.3.0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
+      s.add_development_dependency(%q<sqlite3>, ["~> 1.3.6"])
+      s.add_development_dependency(%q<database_cleaner>, ["~> 0.9.1"])
     else
       s.add_dependency(%q<activerecord>, ["~> 3.2.0"])
-      s.add_dependency(%q<faraday>, [">= 0"])
+      s.add_dependency(%q<hashie>, ["~> 1.2.0"])
       s.add_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, ["~> 1.3.0"])
       s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
+      s.add_dependency(%q<sqlite3>, ["~> 1.3.6"])
+      s.add_dependency(%q<database_cleaner>, ["~> 0.9.1"])
     end
   else
     s.add_dependency(%q<activerecord>, ["~> 3.2.0"])
-    s.add_dependency(%q<faraday>, [">= 0"])
+    s.add_dependency(%q<hashie>, ["~> 1.2.0"])
     s.add_dependency(%q<rspec>, ["~> 2.8.0"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, ["~> 1.3.0"])
     s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
+    s.add_dependency(%q<sqlite3>, ["~> 1.3.6"])
+    s.add_dependency(%q<database_cleaner>, ["~> 0.9.1"])
   end
 end
 

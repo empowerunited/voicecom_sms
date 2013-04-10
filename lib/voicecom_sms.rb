@@ -1,4 +1,8 @@
 require 'voicecom_sms/provider'
+require 'voicecom_sms/request'
+require 'voicecom_sms/response'
+require 'voicecom_sms/message'
+
 require 'hashie/mash'
 
 module VoicecomSms

@@ -8,10 +8,10 @@ Gem::Specification.new do |s|
   s.version = "0.0.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Evgenia Manolova"]
+  s.authors = ["Empower United Services", "Evgenia Manolova"]
   s.date = "2013-04-11"
   s.description = "A fast SMS engine that uses VoiceCom as a service provider"
-  s.email = "emanolova@gmail.com"
+  s.email = "rado@empowerunited.com"
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.md"
@@ -37,7 +37,7 @@ Gem::Specification.new do |s|
     "spec/voicecom_sms/provider_spec.rb",
     "voicecom_sms.gemspec"
   ]
-  s.homepage = "http://github.com/zzeni/voicecom_sms"
+  s.homepage = "http://github.com/empowerunited/voicecom_sms"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.24"

@@ -14,9 +14,16 @@ RSpec.configure do |config|
   config.mock_with :rspec
 end
 
+VoicecomSms.configure do |config|
+  config.provider_ip = '0.0.0.0'
+  config.client_id = 12345
+  config.send_req_path = 'test'
+end
+
+
 ActiveRecord::Base.establish_connection(
   adapter: 'sqlite3',
-  database: File.dirname(__FILE__) + '/faraday_test.sqlite3'
+  database: ':memory:' # File.dirname(__FILE__) + '/faraday_test.sqlite3'
 )
 
 ActiveRecord::Schema.define do

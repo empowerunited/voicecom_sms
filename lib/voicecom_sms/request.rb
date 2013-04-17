@@ -3,10 +3,12 @@ require 'net/http'
 module VoicecomSms
   class Request
     attr_accessor :uri, :params
+    attr_reader :raw_response
 
     def initialize
-      @uri = URI.parse('http://' + VoicecomSms.config.provider_ip)
+      @uri = URI.parse('http://' + VoicecomSms.config.provider_ip + '/' + VoicecomSms.config.send_req_path)
       @params = {}
+      @raw_response = nil
     end
 
     def params=(query_params)
@@ -15,7 +17,11 @@ module VoicecomSms
     end
 
     def send_message
-      Net::HTTP.get_response(@uri)
+      @raw_response = Net::HTTP.get_response(@uri)
+    end
+
+    def sent?
+      @raw_response.present?
     end
 
     def to_s

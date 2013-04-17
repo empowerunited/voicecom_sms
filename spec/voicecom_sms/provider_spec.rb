@@ -5,13 +5,7 @@ require "voicecom_sms/request"
 require "voicecom_sms/response"
 
 describe VoicecomSms::Provider do
-  before(:all) do
-    VoicecomSms.configure do |config|
-      config.provider_ip = '0.0.0.0'
-      config.client_id = 12345
-      config.send_req_path = ''
-    end
-  end
+  include_context :http_response
 
   before(:each) do
     DatabaseCleaner.clean
@@ -27,11 +21,14 @@ describe VoicecomSms::Provider do
   end
 
   describe "#send_sms" do
-    before(:all) do
+    before(:each) do
       @provider = VoicecomSms::Provider.new
+
+      # be sure not to send any real requests
+      Net::HTTP.stub('get_response')
     end
 
-    it "should create new message" do
+    it "should create new message record" do
       expect {
         @provider.send_sms('0888855224', 'some message')
       }.to change(VoicecomSms::Message, :count).by(1)
@@ -43,34 +40,36 @@ describe VoicecomSms::Provider do
       message.number.should == '359888855224'
     end
 
+    it "should set the query params in the request" do
+      @provider.request.params.should be_blank
+      @provider.send_sms('0888855224', 'some message')
+      @provider.request.params.should_not be_blank
+    end
+
     it "should save the request query in the message" do
       @provider.send_sms('08752244433', 'some message')
       message = VoicecomSms::Message.last
-      request = message.request
+      message.request.should == @provider.request.to_s
+    end
 
-      uri = URI.parse(request)
-      uri.hostname.should == VoicecomSms.config.provider_ip
-      uri.path.should == VoicecomSms.config.send_req_path
-
-      params = Hash[URI.decode_www_form(uri.query)]
-
-      params['sid'].should == VoicecomSms.config.client_id.to_s
-      params['msisdn'].should == '3598752244433'
-      params['text'].should == 'some message'
+    it "should send the message to the provider's API" do
+      @provider.request.should_receive('send_message')
+      @provider.send_sms('0888855224', 'some message')
     end
 
     it "should save the response in the message" do
+      Net::HTTP.stub('get_response') { http_success_double }
       @provider.send_sms('08752244433', 'some message')
 
       message = VoicecomSms::Message.last
-      message.response.should =~ /^200 OK: /
-      message.response_received_at.should be_within(1.minute).of(Time.current)
-      message.status.should == @provider.response.status
+      message.response.should == @provider.response.to_s
     end
 
     it "should return the status" do
+      Net::HTTP.stub('get_response') { http_success_double }
+
       result = @provider.send_sms('08752244433', 'some message')
-      result.should == @provider.response.status
+      result.should == VoicecomSms::Provider::STATUS[:success]
     end
   end
 

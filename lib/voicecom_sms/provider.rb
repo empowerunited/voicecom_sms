@@ -20,7 +20,12 @@ module VoicecomSms
       message = VoicecomSms::Message.create({text: text, number: normalize_number(number)})
 
       make_request(message, number, text)
-      parse_response(message)
+
+      if @request.error
+        message.update_attributes(response: @request.error, status: STATUS[:failure])
+      else
+        parse_response(message)
+      end
 
       message.status
     end

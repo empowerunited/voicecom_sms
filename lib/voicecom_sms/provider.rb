@@ -37,6 +37,10 @@ module VoicecomSms
       number
     end
 
+    def error
+      @request.error || @response.to_s
+    end
+
     private
     def make_request(message, number, text)
       @request.params = {

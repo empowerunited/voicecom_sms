@@ -1,20 +1,17 @@
 module VoicecomSms
   class Response
-    attr_reader :code, :message, :body
+    attr_reader :status, :message, :body
 
-    def parse(raw_response)
+    def initialize(raw_response)
       @raw_response = raw_response
-      @code = raw_response.code
-      @message = raw_response.message
+      @status = raw_response.status
       @body = raw_response.body
     end
 
     def success?
-      @raw_response.is_a?(Net::HTTPSuccess) && @body == 'SEND_OK'
+      return false unless @raw_response
+      @raw_response.success? && @body =~ /SEND_OK/ && @body !~ /ERROR/
     end
 
-    def to_s
-      "#@code #@message: #@body"
-    end
   end
 end

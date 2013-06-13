@@ -28,6 +28,31 @@ Finally open and edit the initializer
 
 by filling your credentials for the VioceCom API
 
+### Rails example
+
+rails c
+
+@provider = VoicecomSms::Provider.new
+@provider.send_sms('0888889204', "Vashiyat kod e: 1234")
+
+
+### irb example
+irb
+require 'voicecom_sms'
+puts "make sure that you load the schema.rb"
+
+configuration = VoicecomSms.configure do |config|
+  config.provider_ip = ENV['VOICECOM_IP']
+  config.provider_port = ENV['VOICECOM_PORT']
+  config.client_id = ENV['VOICECOM_CLIENT_ID']
+  config.send_req_path = ENV['VOICECOM_SEND_REQUEST_PATH']
+  puts "Provider settings https://#{config.provider_ip}:#{config.provider_port}#{config.send_req_path}?id=#{config.send_req_path}"
+end
+
+@provider = VoicecomSms::Provider.new
+@provider.send_sms('0888889204', "Vashiyat kod e: 1234")
+
+
 Enjoy :)
 
 ## Contributing to voicecom_sms
@@ -42,6 +67,5 @@ Enjoy :)
 
 ## Copyright
 
-Copyright (c) 2013 Evgenia Manolova. See LICENSE.txt for
-further details.
+Copyright (c) 2013 Empower United. See LICENSE.txt for further details.
 

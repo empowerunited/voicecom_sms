@@ -1,0 +1,8 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.13
+Date: Wed, 12 Jun 2013 12:04:51 GMT
+Content-Type: text/html
+Transfer-Encoding: chunked
+Connection: close
+
+SEND_OK : value 1 duplicated

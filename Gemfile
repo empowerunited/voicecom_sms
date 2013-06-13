@@ -11,8 +11,11 @@ group :development, :test do
   gem "bundler", "~> 1.3.0"
   gem "jeweler", "~> 1.8.4"
   gem "sqlite3", "~> 1.3.6"
+  gem 'awesome_print'
   gem "database_cleaner", "~> 0.9.1"
+  gem 'webmock'
 end
 
 gem "activerecord", '~> 3.2.0'
 gem "hashie", "~> 1.2.0"
+gem "faraday"

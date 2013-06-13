@@ -10,8 +10,10 @@ module VoicecomSms
     # This is the VoiceCom_IP1 part from the request url
     config.provider_ip = '0.0.0.0'
 
+    config.provider_port = '8443'
+
     # This is the SCRIPT_URL part from the request url
-    config.send_req_path = ''
+    config.send_req_path = '/smsapi/bsms/index.php'
 
     # That's your unique identifier in the Voicecom system
     config.client_id = nil

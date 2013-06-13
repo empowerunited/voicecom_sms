@@ -1,4 +1,5 @@
 require 'net/http'
+require 'faraday'
 
 module VoicecomSms
   class Request
@@ -6,37 +7,37 @@ module VoicecomSms
     attr_reader :raw_response, :error
 
     def initialize
-      @uri = URI.parse('https://' + VoicecomSms.config.provider_ip + ':8443/' + VoicecomSms.config.send_req_path)
+      @uri = URI.parse('https://' + VoicecomSms.config.provider_ip + ":" + VoicecomSms.config.provider_port + VoicecomSms.config.send_req_path)
+
+      @connection = Faraday.new(:url => @uri, :ssl => {:verify => false}, timeout: 4, open_timeout: 2) do |faraday|
+        faraday.request  :url_encoded             # form-encode POST params
+        # faraday.response :logger                  # log requests to STDOUT
+        faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
+      end
+
       @params = {}
       @raw_response = nil
       @error = nil
     end
 
-    def params=(query_params)
-      @params = query_params
-      @uri.query = URI.encode_www_form(@params)
-    end
-
     def send_message
-      https = Net::HTTP.new(@uri.host, @uri.port)
-      https.use_ssl = true
-      https.verify_mode = OpenSSL::SSL::VERIFY_NONE # you may put here VERIFY_PEER instead, but make sure to load the provider's certificate (more: http://martinottenwaelter.fr/2010/12/ruby19-and-the-ssl-error/)
+      @raw_response = @connection.get  do |request|
+        request.url @uri.path
+        request.params = @params
+      end
 
-      request = Net::HTTP::Get.new(@uri.path)
-      request.set_form_data(@params)
-
-      @raw_response = https.request(@uri.path)
+      @raw_response
     rescue Exception => e
       @error = e.message
     end
 
     def sent?
-      @error.nil? && @raw_response.present?
+      @raw_response.present?
     end
 
-    def to_s
-      @uri.to_s
+    def logger
+      VoicecomSms.logger
     end
+
   end
 end
-

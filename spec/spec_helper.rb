@@ -3,6 +3,8 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'rspec'
 require 'voicecom_sms'
 require 'database_cleaner'
+require 'awesome_print'
+require 'webmock/rspec'
 
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.
@@ -15,9 +17,11 @@ RSpec.configure do |config|
 end
 
 VoicecomSms.configure do |config|
-  config.provider_ip = '0.0.0.0'
-  config.client_id = 12345
-  config.send_req_path = 'test'
+  config.provider_ip = ENV['VOICECOM_IP']
+  config.provider_port = ENV['VOICECOM_PORT']
+  config.client_id = ENV['VOICECOM_CLIENT_ID']
+  config.send_req_path = ENV['VOICECOM_SEND_REQUEST_PATH']
+  puts "Provider settings https://#{config.provider_ip}:#{config.provider_port}#{config.send_req_path}?id=#{config.send_req_path}"
 end
 
 
@@ -27,7 +31,7 @@ ActiveRecord::Base.establish_connection(
 )
 
 ActiveRecord::Schema.define do
-  self.verbose = false
+  self.verbose = true
 
   create_table :voicecom_messages do |t|
     t.string :number, null: false

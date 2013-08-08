@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Evgenia Manolova"]
-  s.date = "2013-06-12"
+  s.date = "2013-08-08"
   s.description = "A fast SMS engine that uses VoiceCom as a service provider"
   s.email = "emanolova@gmail.com"
   s.extra_rdoc_files = [
@@ -29,10 +29,12 @@ Gem::Specification.new do |s|
     "lib/generators/templates/migrations/create_voicecom_messages.rb",
     "lib/generators/voicecom_sms_generator.rb",
     "lib/voicecom_sms.rb",
+    "lib/voicecom_sms/error.rb",
     "lib/voicecom_sms/message.rb",
     "lib/voicecom_sms/provider.rb",
     "lib/voicecom_sms/request.rb",
     "lib/voicecom_sms/response.rb",
+    "request_stubs/success.curl",
     "spec/spec_helper.rb",
     "spec/voicecom_sms/provider_spec.rb",
     "spec/voicecom_sms/request_spec.rb",
@@ -48,8 +50,8 @@ Gem::Specification.new do |s|
     s.specification_version = 4
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<activerecord>, ["~> 3.2.0"])
-      s.add_runtime_dependency(%q<hashie>, ["~> 1.2.0"])
+      s.add_runtime_dependency(%q<activerecord>, ["> 3.2.0"])
+      s.add_runtime_dependency(%q<hashie>, [">= 0"])
       s.add_runtime_dependency(%q<faraday>, [">= 0"])
       s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
@@ -60,8 +62,8 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<database_cleaner>, ["~> 0.9.1"])
       s.add_development_dependency(%q<webmock>, [">= 0"])
     else
-      s.add_dependency(%q<activerecord>, ["~> 3.2.0"])
-      s.add_dependency(%q<hashie>, ["~> 1.2.0"])
+      s.add_dependency(%q<activerecord>, ["> 3.2.0"])
+      s.add_dependency(%q<hashie>, [">= 0"])
       s.add_dependency(%q<faraday>, [">= 0"])
       s.add_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
@@ -73,8 +75,8 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<webmock>, [">= 0"])
     end
   else
-    s.add_dependency(%q<activerecord>, ["~> 3.2.0"])
-    s.add_dependency(%q<hashie>, ["~> 1.2.0"])
+    s.add_dependency(%q<activerecord>, ["> 3.2.0"])
+    s.add_dependency(%q<hashie>, [">= 0"])
     s.add_dependency(%q<faraday>, [">= 0"])
     s.add_dependency(%q<rspec>, ["~> 2.8.0"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])

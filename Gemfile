@@ -16,6 +16,6 @@ group :development, :test do
   gem 'webmock'
 end
 
-gem "activerecord", '~> 3.2.0'
-gem "hashie", "~> 1.2.0"
+gem "activerecord", '> 3.2.0'
+gem "hashie"
 gem "faraday"

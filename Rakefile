@@ -20,7 +20,7 @@ Jeweler::Tasks.new do |gem|
   gem.summary = %Q{Ruby interface to the VoiceCom SMS Gateway API}
   gem.description = %Q{A fast SMS engine that uses VoiceCom as a service provider}
   gem.email = "emanolova@gmail.com"
-  gem.authors = ["Evgenia Manolova"]
+  gem.authors = ["Evgenia Manolova", "Gudata"]
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new

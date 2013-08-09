@@ -1,6 +1,6 @@
 # voicecom_sms
 
-[![Build Status](https://travis-ci.org/empowerunited/voicecom_sms.png)](https://travis-ci.org/zzeni/voicecom_sms)
+[![Build Status](https://travis-ci.org/empowerunited/voicecom_sms.png?branch=master)](https://travis-ci.org/empowerunited/voicecom_sms)
 
 This ia a simple interface to the VoiceCom SMS API, designed for rails applications.
 

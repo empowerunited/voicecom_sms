@@ -12,7 +12,7 @@ To include to your rails app, simply add it to gemfile:
 
 Then run
 
-    rails generate voicecom_sms
+    rails generate voicecom_sms database
 
 that should create one migration file and an initializer for the gem.
 
@@ -50,10 +50,11 @@ configuration = VoicecomSms.configure do |config|
 end
 
 @provider = VoicecomSms::Provider.new
-@provider.send_sms('0888889204', "Vashiyat kod e: 1234")
+@provider.send_sms('0888889204', "Вашият код в Клуб 50+ е: : 1234")
 
+Note:
+The message should match the template you have given to voicecom
 
-Enjoy :)
 
 ## Contributing to voicecom_sms
 

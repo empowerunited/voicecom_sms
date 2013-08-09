@@ -1,9 +1,7 @@
-require 'rails/generators'
 require 'rails/generators/active_record'
 
-class VoicecomSmsGenerator < Rails::Generators::Base
+class VoicecomSmsGenerator < ActiveRecord::Generators::Base
   include Rails::Generators::Migration
-  extend ActiveRecord::Generators::Migration
 
   TEMPLATES_PATH = File.expand_path('../templates', __FILE__)
   source_root File.expand_path('../../friendly_id', __FILE__)

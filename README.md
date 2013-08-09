@@ -32,25 +32,26 @@ by filling your credentials for the VioceCom API
 
 rails c
 
-@provider = VoicecomSms::Provider.new
-@provider.send_sms('0888889204', "Vashiyat kod e: 1234")
+    @provider = VoicecomSms::Provider.new
+    @provider.send_sms('0888889204', "Vashiyat kod e: 1234")
 
 
 ### irb example
 irb
-require 'voicecom_sms'
-puts "make sure that you load the schema.rb"
 
-configuration = VoicecomSms.configure do |config|
-  config.provider_ip = ENV['VOICECOM_IP']
-  config.provider_port = ENV['VOICECOM_PORT']
-  config.client_id = ENV['VOICECOM_CLIENT_ID']
-  config.send_req_path = ENV['VOICECOM_SEND_REQUEST_PATH']
-  puts "Provider settings https://#{config.provider_ip}:#{config.provider_port}#{config.send_req_path}?id=#{config.send_req_path}"
-end
+    require 'voicecom_sms'
+    puts "make sure that you load the schema.rb"
 
-@provider = VoicecomSms::Provider.new
-@provider.send_sms('0888889204', "Вашият код в Клуб 50+ е: : 1234")
+    configuration = VoicecomSms.configure do |config|
+      config.provider_ip = ENV['VOICECOM_IP']
+      config.provider_port = ENV['VOICECOM_PORT']
+      config.client_id = ENV['VOICECOM_CLIENT_ID']
+      config.send_req_path = ENV['VOICECOM_SEND_REQUEST_PATH']
+      puts "Provider settings https://#{config.provider_ip}:#{config.provider_port}#{config.send_req_path}?id=#{config.send_req_path}"
+    end
+
+    @provider = VoicecomSms::Provider.new
+    @provider.send_sms('0888889204', "Вашият код в Клуб 50+ е: : 1234")
 
 Note:
 The message should match the template you have given to voicecom

@@ -16,6 +16,8 @@ group :development, :test do
   gem 'webmock'
 end
 
+# min, rails 3
+
 gem "activerecord", '> 3.2.0'
 gem "hashie"
 gem "faraday"

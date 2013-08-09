@@ -15,12 +15,12 @@ require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "voicecom_sms"
-  gem.homepage = "http://github.com/zzeni/voicecom_sms"
+  gem.homepage = "https://github.com/empowerunited/voicecom_sms"
   gem.license = "MIT"
   gem.summary = %Q{Ruby interface to the VoiceCom SMS Gateway API}
   gem.description = %Q{A fast SMS engine that uses VoiceCom as a service provider}
-  gem.email = "emanolova@gmail.com"
-  gem.authors = ["Evgenia Manolova", "Gudata"]
+  gem.email = "devteam@empowerunited.com"
+  gem.authors = ["Empowerunited", "Evgenia Manolova", "Gudata"]
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new

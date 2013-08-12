@@ -33,7 +33,7 @@ by filling your credentials for the VioceCom API
 rails c
 
     @provider = VoicecomSms::Provider.new
-    @provider.send_sms('0888889204', "Vashiyat kod e: 1234")
+    @provider.send_sms('359888889204', "Vashiyat kod e: 1234")
 
 
 ### irb example
@@ -51,7 +51,7 @@ irb
     end
 
     @provider = VoicecomSms::Provider.new
-    @provider.send_sms('0888889204', "Вашият код в Клуб 50+ е: : 1234")
+    @provider.send_sms('359888889204', "Вашият код е: : 1234")
 
 Note:
 The message should match the template you have given to voicecom

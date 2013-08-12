@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/empowerunited/voicecom_sms.png?branch=master)](https://travis-ci.org/empowerunited/voicecom_sms)
 
-This ia a simple interface to the VoiceCom SMS API, designed for rails applications.
+This is a simple interface to the VoiceCom SMS API, designed for rails applications.
 
 ## Installation & Usage
 

@@ -18,6 +18,13 @@ module VoicecomSms
       @response = nil
     end
 
+    #
+    # Send the text message to the number
+    # @param  number String Only digits, country code included.
+    #                       example: for Bulgaria (+359) and mobile number 899947121 you should use '359899947121'
+    # @param  text String No idea what characters is supported by voicecom - have to experiment. UTF-8 with latin works for sure.
+    #
+    # @return integer VoicecomSms::Provider::STATUS
     def send_sms(number, text)
       message = VoicecomSms::Message.create({text: text, number: normalize_number(number), status: STATUS[:undefined]})
 
@@ -38,8 +45,6 @@ module VoicecomSms
 
     def normalize_number(number)
       number.gsub!(/\s+/, '')
-      number.sub!(/^(\+|00)/, '')
-      number.sub!(/^0/, '359')
       number
     end
 

@@ -33,12 +33,6 @@ describe VoicecomSms::Provider do
       }.to change(VoicecomSms::Message, :count).by(1)
     end
 
-    it "should try to convert the number to a valid one" do
-      @provider.send_sms("+#{destination_mobile_number}", 'some message')
-      message = VoicecomSms::Message.last
-      message.number.should == destination_mobile_number
-    end
-
     it "should set the query params in the request" do
       @provider.request.params.should be_blank
       @provider.send_sms(destination_mobile_number, 'some message')
@@ -69,18 +63,4 @@ describe VoicecomSms::Provider do
     end
   end
 
-  describe "#normalize_number" do
-    before(:all) do
-      @provider = VoicecomSms::Provider.new
-    end
-
-    it "should convert the number to an acceptable by the API value" do
-      acceptable_value = destination_mobile_number
-
-      @provider.normalize_number('359899947329').should == acceptable_value
-      @provider.normalize_number('0899947329').should == acceptable_value
-      @provider.normalize_number('00359899947329').should == acceptable_value
-      @provider.normalize_number('+359899947329').should == acceptable_value
-    end
-  end
 end

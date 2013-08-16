@@ -23,7 +23,8 @@ describe VoicecomSms::Provider do
   describe "#send_sms" do
     before(:each) do
       @provider = VoicecomSms::Provider.new
-      stub_request(:get, "https://localhost:8443/smsapi/bsms/index.php?id&msisdn=359899947329&sid=#{VoicecomSms.config.client_id}&text=some%20message").
+      stub_request(:get, "https://localhost:8443/smsapi/bsms/index.php?id=1&msisdn=359899947329&sid=#{VoicecomSms.config.client_id}&text=some%20message")
+      stub_request(:get, "https://localhost:8443/smsapi/bsms/index.php?id=1&msisdn=359899947329&sid=#{VoicecomSms.config.client_id}&text=some%20message").
         to_return(lambda { |request| File.new("request_stubs/success.curl")})
     end
 

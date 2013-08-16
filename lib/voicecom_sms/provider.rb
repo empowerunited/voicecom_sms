@@ -24,12 +24,22 @@ module VoicecomSms
     #                       example: for Bulgaria (+359) and mobile number 899947121 you should use '359899947121'
     # @param  text String No idea what characters is supported by voicecom - have to experiment. UTF-8 with latin works for sure.
     #
+    # @block  number it will yield the current message id if you want to process it. for exampel to add the environment
+    #         send_sms('123', 'hi') do |id|
+    #           "#{Rails.env}-#{id}"
+    #         end
+    #
     # @return VoicecomSms::Message - you can take the status field from there, and have the id of the transaction.
-    def send_sms(number, text)
+    def send_sms(number, text, &block)
       message = VoicecomSms::Message.create({text: text, number: normalize_number(number), status: STATUS[:undefined]})
 
-      make_request(message, number, text)
+      message_id = if block_given?
+        yield message.id
+      else
+        message_id
+      end
 
+      make_request(message, number, text, message_id)
 
       if @request.error or !@request.sent?
         message.update_attributes(response: @request.error, status: STATUS[:failure])
@@ -40,7 +50,7 @@ module VoicecomSms
         message.update_attributes(response: @response.inspect, status: status, response_received_at: Time.current)
       end
 
-      message.status
+      message
     end
 
     def normalize_number(number)
@@ -49,11 +59,11 @@ module VoicecomSms
     end
 
     private
-    def make_request(message, number, text)
+    def make_request(message, number, text, message_id)
 
       @request.params = {
         sid: VoicecomSms.config.client_id,
-        id: message.id,
+        id: message_id,
         msisdn: number,
         text: text,
         #priority: 2, # 1 - high priority, 2 - normal priority (default)

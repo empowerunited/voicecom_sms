@@ -23,7 +23,7 @@ describe VoicecomSms::Provider do
   describe "#send_sms" do
     before(:each) do
       @provider = VoicecomSms::Provider.new
-      stub_request(:get, "https://localhost:8443/smsapi/bsms/index.php?sid=#{VoicecomSms.config.client_id}&id=1&msisdn=359899947329&text=some+message").
+      stub_request(:get, "https://localhost:8443/smsapi/bsms/index.php?id&msisdn=359899947329&sid=#{VoicecomSms.config.client_id}&text=some%20message").
         to_return(lambda { |request| File.new("request_stubs/success.curl")})
     end
 
@@ -59,7 +59,7 @@ describe VoicecomSms::Provider do
 
     it "should return the status" do
       result = @provider.send_sms(destination_mobile_number, 'some message')
-      result.should == VoicecomSms::Provider::STATUS[:success]
+      result.should be_an_instance_of VoicecomSms::Message
     end
   end
 

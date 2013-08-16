@@ -35,6 +35,11 @@ rails c
     @provider = VoicecomSms::Provider.new
     @provider.send_sms('359888889204', "Vashiyat kod e: 1234")
 
+or if you want to provide your id of the message
+
+    message = @provider.send_sms('359888889204', "hi") do |voicom_table_id|
+      "#{Rails.env}-#{voicom_table_id}-#{SecureRandom.urlsafe_base64(128)}"
+    end
 
 
 ### irb example

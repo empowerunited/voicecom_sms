@@ -24,7 +24,7 @@ module VoicecomSms
     #                       example: for Bulgaria (+359) and mobile number 899947121 you should use '359899947121'
     # @param  text String No idea what characters is supported by voicecom - have to experiment. UTF-8 with latin works for sure.
     #
-    # @return integer VoicecomSms::Provider::STATUS
+    # @return VoicecomSms::Message - you can take the status field from there, and have the id of the transaction.
     def send_sms(number, text)
       message = VoicecomSms::Message.create({text: text, number: normalize_number(number), status: STATUS[:undefined]})
 

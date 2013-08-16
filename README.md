@@ -36,6 +36,7 @@ rails c
     @provider.send_sms('359888889204', "Vashiyat kod e: 1234")
 
 
+
 ### irb example
 irb
 

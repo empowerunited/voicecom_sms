@@ -41,6 +41,7 @@ or if you want to provide your id of the message
       "#{Rails.env}-#{voicom_table_id}-#{SecureRandom.urlsafe_base64(128)}"
     end
 
+Note: The ID could be max ~ 80 symbols
 
 ### irb example
 irb

@@ -34,9 +34,9 @@ module VoicecomSms
       message = VoicecomSms::Message.create({text: text, number: normalize_number(number), status: STATUS[:undefined]})
 
       message_id = if block_given?
-        yield message.id
+        yield(message.id)
       else
-        message_id
+        message.id
       end
 
       make_request(message, number, text, message_id)

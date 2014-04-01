@@ -4,7 +4,6 @@ require 'rspec'
 require 'voicecom_sms'
 require 'database_cleaner'
 require 'awesome_print'
-require 'webmock/rspec'
 
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.

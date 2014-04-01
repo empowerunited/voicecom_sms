@@ -9,7 +9,7 @@ module VoicecomSms
     def initialize
       @uri = URI.parse('https://' + VoicecomSms.config.provider_ip + ":" + VoicecomSms.config.provider_port + VoicecomSms.config.send_req_path)
 
-      @connection = Faraday.new(:url => @uri, :ssl => {:verify => false}, timeout: 4, open_timeout: 2) do |faraday|
+      @connection = Faraday.new(:url => @uri, :ssl => {:verify => false}, request: {timeout: 4, open_timeout: 2}) do |faraday|
         faraday.request  :url_encoded             # form-encode POST params
         # faraday.response :logger                  # log requests to STDOUT
         faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
